@@ -80,3 +80,17 @@ fprintf('Backward error: %e\n', norm(A - U*S*V', 'fro') / norm(A, 'fro'));
 fprintf('Orthogonality of U: %e\n', norm(U'*U - eye(n), 'fro'));
 fprintf('Orthogonality of V: %e\n', norm(V'*V - eye(n), 'fro'));
 ```
+
+## 5. Warning
+(Updated March 22, 2026)
+
+Today, when I tried to use my code again, MATLAB started crashing
+regardless of how I modified `dgejsv_mex.c`, see [crash file](matlab_crash_report.txt).
+After several hours of debugging, I identified the root cause as a conflict between two `libomp` runtimes being loaded into the same process.
+
+Starting from version `0.3.31`, installing [OpenBLAS from Homebrew](https://formulae.brew.sh/formula/openblas) introduces `libomp` as a dependency. This was not the case for version `0.3.30`; see [here](https://web.archive.org/web/20251130191823/https://formulae.brew.sh/formula/openblas).
+However, MATLAB already ships with its own `libomp` for the MEX runtime. On my laptop, for example, it uses
+```text
+/Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib
+```
+As a result, when the MEX file is executed, two different `libomp` runtimes are loaded into the same MATLAB process, which leads to segmentation faults.

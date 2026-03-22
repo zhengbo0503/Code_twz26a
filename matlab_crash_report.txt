@@ -1,0 +1,552 @@
+MATLAB Log File: /Users/cyae/matlab_crash_dump.17965-10
+
+------------------------------------------------
+MATLAB Log File
+------------------------------------------------ 
+
+
+--------------------------------------------------------------------------------
+          Segmentation violation detected at 2026-03-22 16:28:49 +0000
+--------------------------------------------------------------------------------
+
+Configuration:
+  Crash Decoding           : Disabled - No sandbox or build area path
+  Crash Mode               : continue (default)
+  Default Encoding         : UTF-8
+  Deployed                 : false
+  Graphics Driver          : Uninitialized hardware 
+  Interpreter 0            : Executing request: 72323461302F4576616C466576616C43616E63656C2E637070
+  MATLAB Architecture      : maca64
+  MATLAB Entitlement ID    : 7095212
+  MATLAB Root              : /Applications/MATLAB_R2025b.app
+  MATLAB Version           : 25.2.0.3042426 (R2025b) Update 1
+  OpenGL                   : hardware
+  Operating System         : Mac OS Version 26.3.1 (Build 25D2128)
+  Process ID               : 17965
+  Processor ID             : ABI64 ARM ARM64E
+  Session Key              : bd2r7f75tyykpc9yrf26pn517
+  Window System            : Quartz
+
+Fault Count: 11
+
+
+Abnormal termination:
+Segmentation violation
+
+Current Thread: '' id 0x16eb23000
+
+Register State (from fault):
+   X0 = 0000000000000000   X1 = 000000016eb22bd8
+   X2 = fffff76af8565c14   X3 = 0000000fffffc088
+   X4 = 0000000000000001   X5 = 0000000000000000
+   X6 = 0000000000000034   X7 = 0000000000000000
+   X8 = 0000000becd44c40   X9 = 000000000003b1e6
+  X10 = 00000000000003e8  X11 = 0055b0260383a3b8
+  X12 = 00000000016e3600  X13 = 0000000000007a94
+  X14 = 0000000121d7c600  X15 = 0000000000000000
+  X16 = 0000000116ef6108  X17 = 00000001f88ece60
+  X18 = 0000000000000000  X19 = 0000000000000000
+  X20 = 0000000be1770e40  X21 = 000000016eb22bd8
+  X22 = 000000016eb22bd8  X23 = 0000000000000000
+  X24 = 0000000000000004  X25 = 0000000000000001
+  X26 = 0000000121d82e28  X27 = 0000000be17713c8
+  X28 = 0000000121d8924c
+
+   FP = 000000016eb22a40   LR = 0000000116ef6144
+   SP = 000000016eb22980   PC = 0000000116ef5794
+
+ CPSR = 60001000
+
+
+Stack Trace (from fault):
+[  0] 0x0000000104aaa820 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00010272 _ZN10foundation4core4diag15stacktrace_base7captureERKNS1_14thread_contextEm+00000064
+[  1] 0x0000000104aad8bc /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00022716 _ZN10foundation4core4test17terminate_handledERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE+00002208
+[  2] 0x0000000104aacd14 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00019732 _ZN10foundation4core4diag13terminate_logEPKcPK17__darwin_ucontext+00000140
+[  3] 0x0000000110f39188 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00479624 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00011664
+[  4] 0x0000000110f370e0 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00471264 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00003304
+[  5] 0x0000000110f34a90 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00461456 mnFatalSignalHandler+00000136
+[  6] 0x000000018b071764           /usr/lib/system/libsystem_platform.dylib+00014180 _sigtramp+00000056
+[  7] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  8] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  9] 0x0000000121d3d5a8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00234920 _ZN11kmp_flag_64ILb0ELb1EE4waitEP8kmp_infoiPv+00001712
+[ 10] 0x0000000121d398b0 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00219312 _ZL27__kmp_hyper_barrier_release12barrier_typeP8kmp_infoiiiPv+00000164
+[ 11] 0x0000000121d3c3d4 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00230356 _Z18__kmp_fork_barrierii+00000460
+[ 12] 0x0000000121d21eb8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00122552 __kmp_launch_thread+00000220
+[ 13] 0x0000000121d553b8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00332728 _ZL19__kmp_launch_workerPv+00000252
+[ 14] 0x000000018b067c08            /usr/lib/system/libsystem_pthread.dylib+00027656 _pthread_start+00000136
+[ 15] 0x000000018b062ba8            /usr/lib/system/libsystem_pthread.dylib+00007080 thread_start+00000008
+
+
+Abnormal termination:
+Segmentation violation
+
+Current Thread: '' id 0x170e5f000
+
+Register State (from fault):
+   X0 = 0000000000000000   X1 = 0000000170e5ebd8
+   X2 = fffff76af8565c14   X3 = 0000000fffffc088
+   X4 = 0000000000000001   X5 = 0000000000000000
+   X6 = 0000000000000036   X7 = 0000000000000000
+   X8 = 0000000becd44c40   X9 = 000000000003b1da
+  X10 = 00000000000003e8  X11 = 0054f09bf0ea70ac
+  X12 = 00000000016e3600  X13 = 0000000000007982
+  X14 = 0000000121d7c600  X15 = 0000000000000000
+  X16 = 0000000116ef6108  X17 = 00000001f88ece60
+  X18 = 0000000000000000  X19 = 0000000000000000
+  X20 = 0000000be1772340  X21 = 0000000170e5ebd8
+  X22 = 0000000170e5ebd8  X23 = 0000000000000000
+  X24 = 0000000000000006  X25 = 0000000000000001
+  X26 = 0000000121d82e28  X27 = 0000000be17728c8
+  X28 = 0000000121d8924c
+
+   FP = 0000000170e5ea40   LR = 0000000116ef6144
+   SP = 0000000170e5e980   PC = 0000000116ef5794
+
+ CPSR = 60001000
+
+
+Stack Trace (from fault):
+[  0] 0x0000000104aaa820 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00010272 _ZN10foundation4core4diag15stacktrace_base7captureERKNS1_14thread_contextEm+00000064
+[  1] 0x0000000104aad8bc /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00022716 _ZN10foundation4core4test17terminate_handledERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE+00002208
+[  2] 0x0000000104aacd14 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00019732 _ZN10foundation4core4diag13terminate_logEPKcPK17__darwin_ucontext+00000140
+[  3] 0x0000000110f39188 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00479624 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00011664
+[  4] 0x0000000110f370e0 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00471264 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00003304
+[  5] 0x0000000110f34a90 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00461456 mnFatalSignalHandler+00000136
+[  6] 0x000000018b071764           /usr/lib/system/libsystem_platform.dylib+00014180 _sigtramp+00000056
+[  7] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  8] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  9] 0x0000000121d3d5a8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00234920 _ZN11kmp_flag_64ILb0ELb1EE4waitEP8kmp_infoiPv+00001712
+[ 10] 0x0000000121d398b0 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00219312 _ZL27__kmp_hyper_barrier_release12barrier_typeP8kmp_infoiiiPv+00000164
+[ 11] 0x0000000121d3c3d4 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00230356 _Z18__kmp_fork_barrierii+00000460
+[ 12] 0x0000000121d21eb8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00122552 __kmp_launch_thread+00000220
+[ 13] 0x0000000121d553b8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00332728 _ZL19__kmp_launch_workerPv+00000252
+[ 14] 0x000000018b067c08            /usr/lib/system/libsystem_pthread.dylib+00027656 _pthread_start+00000136
+[ 15] 0x000000018b062ba8            /usr/lib/system/libsystem_pthread.dylib+00007080 thread_start+00000008
+
+
+Abnormal termination:
+Segmentation violation
+
+Current Thread: '' id 0x171b9b000
+
+Register State (from fault):
+   X0 = 0000000000000000   X1 = 0000000171b9abd8
+   X2 = fffff76af8565c14   X3 = 0000000fffffc088
+   X4 = 0000000000000001   X5 = 0000000000000000
+   X6 = 0000000000000039   X7 = 0000000000000000
+   X8 = 0000000becd44c40   X9 = 000000000003b1f2
+  X10 = 00000000000003e8  X11 = 0056828fe93ae256
+  X12 = 00000000016e3600  X13 = 0000000000007bc1
+  X14 = 0000000121d7c600  X15 = 0000000000000000
+  X16 = 0000000116ef6108  X17 = 00000001f88ece60
+  X18 = 0000000000000000  X19 = 0000000000000000
+  X20 = 0000000be1778e40  X21 = 0000000171b9abd8
+  X22 = 0000000171b9abd8  X23 = 0000000000000000
+  X24 = 0000000000000009  X25 = 0000000000000001
+  X26 = 0000000121d82e28  X27 = 0000000be17793c8
+  X28 = 0000000121d8924c
+
+   FP = 0000000171b9aa40   LR = 0000000116ef6144
+   SP = 0000000171b9a980   PC = 0000000116ef5794
+
+ CPSR = 60001000
+
+
+Stack Trace (from fault):
+[  0] 0x0000000104aaa820 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00010272 _ZN10foundation4core4diag15stacktrace_base7captureERKNS1_14thread_contextEm+00000064
+[  1] 0x0000000104aad8bc /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00022716 _ZN10foundation4core4test17terminate_handledERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE+00002208
+[  2] 0x0000000104aacd14 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00019732 _ZN10foundation4core4diag13terminate_logEPKcPK17__darwin_ucontext+00000140
+[  3] 0x0000000110f39188 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00479624 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00011664
+[  4] 0x0000000110f370e0 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00471264 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00003304
+[  5] 0x0000000110f34a90 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00461456 mnFatalSignalHandler+00000136
+[  6] 0x000000018b071764           /usr/lib/system/libsystem_platform.dylib+00014180 _sigtramp+00000056
+[  7] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  8] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  9] 0x0000000121d3d5a8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00234920 _ZN11kmp_flag_64ILb0ELb1EE4waitEP8kmp_infoiPv+00001712
+[ 10] 0x0000000121d398b0 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00219312 _ZL27__kmp_hyper_barrier_release12barrier_typeP8kmp_infoiiiPv+00000164
+[ 11] 0x0000000121d3c3d4 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00230356 _Z18__kmp_fork_barrierii+00000460
+[ 12] 0x0000000121d21eb8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00122552 __kmp_launch_thread+00000220
+[ 13] 0x0000000121d553b8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00332728 _ZL19__kmp_launch_workerPv+00000252
+[ 14] 0x000000018b067c08            /usr/lib/system/libsystem_pthread.dylib+00027656 _pthread_start+00000136
+[ 15] 0x000000018b062ba8            /usr/lib/system/libsystem_pthread.dylib+00007080 thread_start+00000008
+
+
+Abnormal termination:
+Segmentation violation
+
+Current Thread: '' id 0x16e263000
+
+Register State (from fault):
+   X0 = 0000000000000000   X1 = 000000016e262bd8
+   X2 = fffff76af8565c14   X3 = 0000000fffffc088
+   X4 = 0000000000000001   X5 = 0000000000000000
+   X6 = 0000000000000032   X7 = 0000000000000000
+   X8 = 0000000becd44c40   X9 = 000000000003b1f9
+  X10 = 00000000000003e8  X11 = 0056f31be713f7ec
+  X12 = 00000000016e3600  X13 = 0000000000007c62
+  X14 = 0000000121d7c600  X15 = 0000000000000000
+  X16 = 0000000116ef6108  X17 = 00000001f88ece60
+  X18 = 0000000000000000  X19 = 0000000000000000
+  X20 = 0000000be176b840  X21 = 000000016e262bd8
+  X22 = 000000016e262bd8  X23 = 0000000000000000
+  X24 = 0000000000000002  X25 = 0000000000000001
+  X26 = 0000000121d82e28  X27 = 0000000be176bdc8
+  X28 = 0000000121d8924c
+
+   FP = 000000016e262a40   LR = 0000000116ef6144
+   SP = 000000016e262980   PC = 0000000116ef5794
+
+ CPSR = 60001000
+
+
+Stack Trace (from fault):
+[  0] 0x0000000104aaa820 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00010272 _ZN10foundation4core4diag15stacktrace_base7captureERKNS1_14thread_contextEm+00000064
+[  1] 0x0000000104aad8bc /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00022716 _ZN10foundation4core4test17terminate_handledERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE+00002208
+[  2] 0x0000000104aacd14 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00019732 _ZN10foundation4core4diag13terminate_logEPKcPK17__darwin_ucontext+00000140
+[  3] 0x0000000110f39188 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00479624 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00011664
+[  4] 0x0000000110f370e0 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00471264 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00003304
+[  5] 0x0000000110f34a90 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00461456 mnFatalSignalHandler+00000136
+[  6] 0x000000018b071764           /usr/lib/system/libsystem_platform.dylib+00014180 _sigtramp+00000056
+[  7] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  8] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  9] 0x0000000121d3d5a8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00234920 _ZN11kmp_flag_64ILb0ELb1EE4waitEP8kmp_infoiPv+00001712
+[ 10] 0x0000000121d398b0 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00219312 _ZL27__kmp_hyper_barrier_release12barrier_typeP8kmp_infoiiiPv+00000164
+[ 11] 0x0000000121d3c3d4 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00230356 _Z18__kmp_fork_barrierii+00000460
+[ 12] 0x0000000121d21eb8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00122552 __kmp_launch_thread+00000220
+[ 13] 0x0000000121d553b8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00332728 _ZL19__kmp_launch_workerPv+00000252
+[ 14] 0x000000018b067c08            /usr/lib/system/libsystem_pthread.dylib+00027656 _pthread_start+00000136
+[ 15] 0x000000018b062ba8            /usr/lib/system/libsystem_pthread.dylib+00007080 thread_start+00000008
+
+
+Abnormal termination:
+Segmentation violation
+
+Current Thread: '' id 0x172327000
+
+Register State (from fault):
+   X0 = 0000000000000000   X1 = 0000000172326bd8
+   X2 = fffff76af8565c14   X3 = 0000000fffffc088
+   X4 = 0000000000000001   X5 = 0000000000000000
+   X6 = 0000000000000030   X7 = 0000000000000000
+   X8 = 0000000becd44c40   X9 = 000000000003b1f8
+  X10 = 00000000000003e8  X11 = 0056e739a485cab6
+  X12 = 00000000016e3600  X13 = 0000000000007c51
+  X14 = 0000000121d7c600  X15 = 0000000000000000
+  X16 = 0000000116ef6108  X17 = 00000001f88ece60
+  X18 = 0000000000000000  X19 = 0000000000000000
+  X20 = 0000000be1779540  X21 = 0000000172326bd8
+  X22 = 0000000172326bd8  X23 = 0000000000000000
+  X24 = 000000000000000a  X25 = 0000000000000001
+  X26 = 0000000121d82e28  X27 = 0000000be1779ac8
+  X28 = 0000000121d8924c
+
+   FP = 0000000172326a40   LR = 0000000116ef6144
+   SP = 0000000172326980   PC = 0000000116ef5794
+
+ CPSR = 60001000
+
+
+Stack Trace (from fault):
+[  0] 0x0000000104aaa820 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00010272 _ZN10foundation4core4diag15stacktrace_base7captureERKNS1_14thread_contextEm+00000064
+[  1] 0x0000000104aad8bc /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00022716 _ZN10foundation4core4test17terminate_handledERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE+00002208
+[  2] 0x0000000104aacd14 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00019732 _ZN10foundation4core4diag13terminate_logEPKcPK17__darwin_ucontext+00000140
+[  3] 0x0000000110f39188 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00479624 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00011664
+[  4] 0x0000000110f370e0 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00471264 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00003304
+[  5] 0x0000000110f34a90 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00461456 mnFatalSignalHandler+00000136
+[  6] 0x000000018b071764           /usr/lib/system/libsystem_platform.dylib+00014180 _sigtramp+00000056
+[  7] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  8] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  9] 0x0000000121d3d5a8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00234920 _ZN11kmp_flag_64ILb0ELb1EE4waitEP8kmp_infoiPv+00001712
+[ 10] 0x0000000121d398b0 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00219312 _ZL27__kmp_hyper_barrier_release12barrier_typeP8kmp_infoiiiPv+00000164
+[ 11] 0x0000000121d3c3d4 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00230356 _Z18__kmp_fork_barrierii+00000460
+[ 12] 0x0000000121d21eb8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00122552 __kmp_launch_thread+00000220
+[ 13] 0x0000000121d553b8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00332728 _ZL19__kmp_launch_workerPv+00000252
+[ 14] 0x000000018b067c08            /usr/lib/system/libsystem_pthread.dylib+00027656 _pthread_start+00000136
+[ 15] 0x000000018b062ba8            /usr/lib/system/libsystem_pthread.dylib+00007080 thread_start+00000008
+
+
+Abnormal termination:
+Segmentation violation
+
+Current Thread: '' id 0x1719db000
+
+Register State (from fault):
+   X0 = 0000000000000000   X1 = 00000001719dabd8
+   X2 = fffff76af8565c14   X3 = 0000000fffffc088
+   X4 = 0000000000000001   X5 = 0000000000000000
+   X6 = 0000000000000038   X7 = 0000000000000000
+   X8 = 0000000becd44c40   X9 = 000000000003b1f5
+  X10 = 00000000000003e8  X11 = 0056a9b5792d5926
+  X12 = 00000000016e3600  X13 = 0000000000007bf9
+  X14 = 0000000121d7c600  X15 = 0000000000000000
+  X16 = 0000000116ef6108  X17 = 00000001f88ece60
+  X18 = 0000000000000000  X19 = 0000000000000000
+  X20 = 0000000be1778740  X21 = 00000001719dabd8
+  X22 = 00000001719dabd8  X23 = 0000000000000000
+  X24 = 0000000000000008  X25 = 0000000000000001
+  X26 = 0000000121d82e28  X27 = 0000000be1778cc8
+  X28 = 0000000121d8924c
+
+   FP = 00000001719daa40   LR = 0000000116ef6144
+   SP = 00000001719da980   PC = 0000000116ef5794
+
+ CPSR = 60001000
+
+
+Stack Trace (from fault):
+[  0] 0x0000000104aaa820 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00010272 _ZN10foundation4core4diag15stacktrace_base7captureERKNS1_14thread_contextEm+00000064
+[  1] 0x0000000104aad8bc /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00022716 _ZN10foundation4core4test17terminate_handledERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE+00002208
+[  2] 0x0000000104aacd14 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00019732 _ZN10foundation4core4diag13terminate_logEPKcPK17__darwin_ucontext+00000140
+[  3] 0x0000000110f39188 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00479624 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00011664
+[  4] 0x0000000110f370e0 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00471264 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00003304
+[  5] 0x0000000110f34a90 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00461456 mnFatalSignalHandler+00000136
+[  6] 0x000000018b071764           /usr/lib/system/libsystem_platform.dylib+00014180 _sigtramp+00000056
+[  7] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  8] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  9] 0x0000000121d3d5a8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00234920 _ZN11kmp_flag_64ILb0ELb1EE4waitEP8kmp_infoiPv+00001712
+[ 10] 0x0000000121d398b0 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00219312 _ZL27__kmp_hyper_barrier_release12barrier_typeP8kmp_infoiiiPv+00000164
+[ 11] 0x0000000121d3c3d4 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00230356 _Z18__kmp_fork_barrierii+00000460
+[ 12] 0x0000000121d21eb8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00122552 __kmp_launch_thread+00000220
+[ 13] 0x0000000121d553b8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00332728 _ZL19__kmp_launch_workerPv+00000252
+[ 14] 0x000000018b067c08            /usr/lib/system/libsystem_pthread.dylib+00027656 _pthread_start+00000136
+[ 15] 0x000000018b062ba8            /usr/lib/system/libsystem_pthread.dylib+00007080 thread_start+00000008
+
+
+Abnormal termination:
+Segmentation violation
+
+Current Thread: '' id 0x17f72b000
+
+Register State (from fault):
+   X0 = 0000000000000000   X1 = 000000017f72abd8
+   X2 = fffff76af8565c14   X3 = 0000000fffffc088
+   X4 = 0000000000000001   X5 = 0000000000000000
+   X6 = 0000000000000031   X7 = 0000000000000000
+   X8 = 0000000becd44c40   X9 = 000000000003b202
+  X10 = 00000000000003e8  X11 = 0057810410e2e69e
+  X12 = 00000000016e3600  X13 = 0000000000007d2d
+  X14 = 0000000121d7c600  X15 = 0000000000000000
+  X16 = 0000000116ef6108  X17 = 00000001f88ece60
+  X18 = 0000000000000000  X19 = 0000000000000000
+  X20 = 0000000be1779c40  X21 = 000000017f72abd8
+  X22 = 000000017f72abd8  X23 = 0000000000000000
+  X24 = 000000000000000b  X25 = 0000000000000001
+  X26 = 0000000121d82e28  X27 = 0000000be177a1c8
+  X28 = 0000000121d8924c
+
+   FP = 000000017f72aa40   LR = 0000000116ef6144
+   SP = 000000017f72a980   PC = 0000000116ef5794
+
+ CPSR = 60001000
+
+
+Stack Trace (from fault):
+[  0] 0x0000000104aaa820 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00010272 _ZN10foundation4core4diag15stacktrace_base7captureERKNS1_14thread_contextEm+00000064
+[  1] 0x0000000104aad8bc /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00022716 _ZN10foundation4core4test17terminate_handledERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE+00002208
+[  2] 0x0000000104aacd14 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00019732 _ZN10foundation4core4diag13terminate_logEPKcPK17__darwin_ucontext+00000140
+[  3] 0x0000000110f39188 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00479624 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00011664
+[  4] 0x0000000110f370e0 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00471264 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00003304
+[  5] 0x0000000110f34a90 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00461456 mnFatalSignalHandler+00000136
+[  6] 0x000000018b071764           /usr/lib/system/libsystem_platform.dylib+00014180 _sigtramp+00000056
+[  7] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  8] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  9] 0x0000000121d3d5a8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00234920 _ZN11kmp_flag_64ILb0ELb1EE4waitEP8kmp_infoiPv+00001712
+[ 10] 0x0000000121d398b0 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00219312 _ZL27__kmp_hyper_barrier_release12barrier_typeP8kmp_infoiiiPv+00000164
+[ 11] 0x0000000121d3c3d4 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00230356 _Z18__kmp_fork_barrierii+00000460
+[ 12] 0x0000000121d21eb8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00122552 __kmp_launch_thread+00000220
+[ 13] 0x0000000121d553b8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00332728 _ZL19__kmp_launch_workerPv+00000252
+[ 14] 0x000000018b067c08            /usr/lib/system/libsystem_pthread.dylib+00027656 _pthread_start+00000136
+[ 15] 0x000000018b062ba8            /usr/lib/system/libsystem_pthread.dylib+00007080 thread_start+00000008
+
+
+Abnormal termination:
+Segmentation violation
+
+Current Thread: '' id 0x16ea97000
+
+Register State (from fault):
+   X0 = 0000000000000000   X1 = 000000016ea96bd8
+   X2 = fffff76af8565c14   X3 = 0000000fffffc088
+   X4 = 0000000000000001   X5 = 0000000000000000
+   X6 = 0000000000000033   X7 = 0000000000000000
+   X8 = 0000000becd44c40   X9 = 000000000003b1d3
+  X10 = 00000000000003e8  X11 = 00546ffbf3600edc
+  X12 = 00000000016e3600  X13 = 00000000000078ca
+  X14 = 0000000121d7c600  X15 = 0000000000000000
+  X16 = 0000000116ef6108  X17 = 00000001f88ece60
+  X18 = 0000000000000000  X19 = 0000000000000000
+  X20 = 0000000be175b840  X21 = 000000016ea96bd8
+  X22 = 000000016ea96bd8  X23 = 0000000000000000
+  X24 = 0000000000000003  X25 = 0000000000000001
+  X26 = 0000000121d82e28  X27 = 0000000be175bdc8
+  X28 = 0000000121d8924c
+
+   FP = 000000016ea96a40   LR = 0000000116ef6144
+   SP = 000000016ea96980   PC = 0000000116ef5794
+
+ CPSR = 60001000
+
+
+Stack Trace (from fault):
+[  0] 0x0000000104aaa820 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00010272 _ZN10foundation4core4diag15stacktrace_base7captureERKNS1_14thread_contextEm+00000064
+[  1] 0x0000000104aad8bc /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00022716 _ZN10foundation4core4test17terminate_handledERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE+00002208
+[  2] 0x0000000104aacd14 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00019732 _ZN10foundation4core4diag13terminate_logEPKcPK17__darwin_ucontext+00000140
+[  3] 0x0000000110f39188 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00479624 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00011664
+[  4] 0x0000000110f370e0 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00471264 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00003304
+[  5] 0x0000000110f34a90 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00461456 mnFatalSignalHandler+00000136
+[  6] 0x000000018b071764           /usr/lib/system/libsystem_platform.dylib+00014180 _sigtramp+00000056
+[  7] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  8] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  9] 0x0000000121d3d5a8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00234920 _ZN11kmp_flag_64ILb0ELb1EE4waitEP8kmp_infoiPv+00001712
+[ 10] 0x0000000121d398b0 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00219312 _ZL27__kmp_hyper_barrier_release12barrier_typeP8kmp_infoiiiPv+00000164
+[ 11] 0x0000000121d3c3d4 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00230356 _Z18__kmp_fork_barrierii+00000460
+[ 12] 0x0000000121d21eb8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00122552 __kmp_launch_thread+00000220
+[ 13] 0x0000000121d553b8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00332728 _ZL19__kmp_launch_workerPv+00000252
+[ 14] 0x000000018b067c08            /usr/lib/system/libsystem_pthread.dylib+00027656 _pthread_start+00000136
+[ 15] 0x000000018b062ba8            /usr/lib/system/libsystem_pthread.dylib+00007080 thread_start+00000008
+
+
+Abnormal termination:
+abort()
+
+Current Thread: '' id 0x16cdc3000
+
+Register State (from fault):
+   X0 = 0000000000000000   X1 = 0000000000000000
+   X2 = 0000000000000000   X3 = 0000000000000000
+   X4 = 0000000bfb4c6e80   X5 = 0000000000000000
+   X6 = 0000000000000062   X7 = fffff0003ffff800
+   X8 = e1bba3125fd09cd3   X9 = e1bba313330cacd3
+  X10 = 0000000000000002  X11 = 0000010000000000
+  X12 = 00000000fffffffd  X13 = 0000000000000000
+  X14 = 0000000000000000  X15 = 0000000000000000
+  X16 = 0000000000000148  X17 = 00000001f88ecfc0
+  X18 = 0000000000000000  X19 = 0000000000000006
+  X20 = 00000000000107c3  X21 = 000000016cdc30e0
+  X22 = 000000016cdc2bd8  X23 = 0000000000000000
+  X24 = 0000000000000001  X25 = 0000000000000001
+  X26 = 0000000121d82e28  X27 = 0000000be17653c8
+  X28 = 0000000121d8924c
+
+   FP = 000000016cdc28f0   LR = 000000018b067888
+   SP = 000000016cdc28d0   PC = 000000018b02d5b0
+
+ CPSR = 40001000
+
+
+Stack Trace (from fault):
+[  0] 0x0000000104aaa820 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00010272 _ZN10foundation4core4diag15stacktrace_base7captureERKNS1_14thread_contextEm+00000064
+[  1] 0x0000000104aad8bc /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00022716 _ZN10foundation4core4test17terminate_handledERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE+00002208
+[  2] 0x0000000104aacd14 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00019732 _ZN10foundation4core4diag13terminate_logEPKcPK17__darwin_ucontext+00000140
+[  3] 0x0000000110f39188 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00479624 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00011664
+[  4] 0x0000000110f370e0 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00471264 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00003304
+[  5] 0x0000000110f35ff4 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00466932 _Z22mnInstallCrashHandlersv+00000656
+[  6] 0x000000018b071764           /usr/lib/system/libsystem_platform.dylib+00014180 _sigtramp+00000056
+[  7] 0x000000018b067888            /usr/lib/system/libsystem_pthread.dylib+00026760 pthread_kill+00000296
+[  8] 0x000000018af6c850                  /usr/lib/system/libsystem_c.dylib+00497744 abort+00000124
+[  9] 0x0000000116eae0e0 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00106720 __kmp_unregister_library+00000000
+[ 10] 0x0000000116eacb28 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00101160 __kmp_vprintf+00000000
+[ 11] 0x0000000116ef58d4 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00399572 __kmp_suspend_uninitialize_thread+00000000
+[ 12] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[ 13] 0x0000000121d3d5a8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00234920 _ZN11kmp_flag_64ILb0ELb1EE4waitEP8kmp_infoiPv+00001712
+[ 14] 0x0000000121d398b0 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00219312 _ZL27__kmp_hyper_barrier_release12barrier_typeP8kmp_infoiiiPv+00000164
+[ 15] 0x0000000121d3c3d4 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00230356 _Z18__kmp_fork_barrierii+00000460
+[ 16] 0x0000000121d21eb8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00122552 __kmp_launch_thread+00000220
+[ 17] 0x0000000121d553b8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00332728 _ZL19__kmp_launch_workerPv+00000252
+[ 18] 0x000000018b067c08            /usr/lib/system/libsystem_pthread.dylib+00027656 _pthread_start+00000136
+[ 19] 0x000000018b062ba8            /usr/lib/system/libsystem_pthread.dylib+00007080 thread_start+00000008
+
+
+Abnormal termination:
+Segmentation violation
+
+Current Thread: '' id 0x1713d7000
+
+Register State (from fault):
+   X0 = 0000000000000000   X1 = 00000001713d6bd8
+   X2 = fffff76af8565c14   X3 = 0000000fffffc088
+   X4 = 0000000000000001   X5 = 0000000000000000
+   X6 = 0000000000000037   X7 = 0000000000000000
+   X8 = 0000000becd44c40   X9 = 000000000003b1f2
+  X10 = 00000000000003e8  X11 = 00568342de16122c
+  X12 = 00000000016e3600  X13 = 0000000000007bc2
+  X14 = 0000000121d7c600  X15 = 0000000000000000
+  X16 = 0000000116ef6108  X17 = 00000001f88ece60
+  X18 = 0000000000000000  X19 = 0000000000000000
+  X20 = 0000000be1778040  X21 = 00000001713d6bd8
+  X22 = 00000001713d6bd8  X23 = 0000000000000000
+  X24 = 0000000000000007  X25 = 0000000000000001
+  X26 = 0000000121d82e28  X27 = 0000000be17785c8
+  X28 = 0000000121d8924c
+
+   FP = 00000001713d6a40   LR = 0000000116ef6144
+   SP = 00000001713d6980   PC = 0000000116ef5794
+
+ CPSR = 60001000
+
+
+Stack Trace (from fault):
+[  0] 0x0000000104aaa820 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00010272 _ZN10foundation4core4diag15stacktrace_base7captureERKNS1_14thread_contextEm+00000064
+[  1] 0x0000000104aad8bc /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00022716 _ZN10foundation4core4test17terminate_handledERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE+00002208
+[  2] 0x0000000104aacd14 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00019732 _ZN10foundation4core4diag13terminate_logEPKcPK17__darwin_ucontext+00000140
+[  3] 0x0000000110f39188 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00479624 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00011664
+[  4] 0x0000000110f370e0 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00471264 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00003304
+[  5] 0x0000000110f34a90 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00461456 mnFatalSignalHandler+00000136
+[  6] 0x000000018b071764           /usr/lib/system/libsystem_platform.dylib+00014180 _sigtramp+00000056
+[  7] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  8] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  9] 0x0000000121d3d5a8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00234920 _ZN11kmp_flag_64ILb0ELb1EE4waitEP8kmp_infoiPv+00001712
+[ 10] 0x0000000121d398b0 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00219312 _ZL27__kmp_hyper_barrier_release12barrier_typeP8kmp_infoiiiPv+00000164
+[ 11] 0x0000000121d3c3d4 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00230356 _Z18__kmp_fork_barrierii+00000460
+[ 12] 0x0000000121d21eb8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00122552 __kmp_launch_thread+00000220
+[ 13] 0x0000000121d553b8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00332728 _ZL19__kmp_launch_workerPv+00000252
+[ 14] 0x000000018b067c08            /usr/lib/system/libsystem_pthread.dylib+00027656 _pthread_start+00000136
+[ 15] 0x000000018b062ba8            /usr/lib/system/libsystem_pthread.dylib+00007080 thread_start+00000008
+
+
+Abnormal termination:
+Segmentation violation
+
+Current Thread: '' id 0x16edbb000
+
+Register State (from fault):
+   X0 = 0000000000000000   X1 = 000000016edbabd8
+   X2 = fffff76af8565c14   X3 = 0000000fffffc088
+   X4 = 0000000000000001   X5 = 0000000000000000
+   X6 = 0000000000000035   X7 = 0000000000000000
+   X8 = 0000000becd44c40   X9 = 000000000003b1f2
+  X10 = 00000000000003e8  X11 = 00567a2c6ef4a44e
+  X12 = 00000000016e3600  X13 = 0000000000007bb5
+  X14 = 0000000121d7c600  X15 = 0000000000000000
+  X16 = 0000000116ef6108  X17 = 00000001f88ece60
+  X18 = 0000000000000000  X19 = 0000000000000000
+  X20 = 0000000be1770040  X21 = 000000016edbabd8
+  X22 = 000000016edbabd8  X23 = 0000000000000000
+  X24 = 0000000000000005  X25 = 0000000000000001
+  X26 = 0000000121d82e28  X27 = 0000000be17705c8
+  X28 = 0000000121d8924c
+
+   FP = 000000016edbaa40   LR = 0000000116ef6144
+   SP = 000000016edba980   PC = 0000000116ef5794
+
+ CPSR = 60001000
+
+
+Stack Trace (from fault):
+[  0] 0x0000000104aaa820 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00010272 _ZN10foundation4core4diag15stacktrace_base7captureERKNS1_14thread_contextEm+00000064
+[  1] 0x0000000104aad8bc /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00022716 _ZN10foundation4core4test17terminate_handledERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE+00002208
+[  2] 0x0000000104aacd14 /Applications/MATLAB_R2025b.app/bin/maca64/libmwfl.dylib+00019732 _ZN10foundation4core4diag13terminate_logEPKcPK17__darwin_ucontext+00000140
+[  3] 0x0000000110f39188 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00479624 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00011664
+[  4] 0x0000000110f370e0 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00471264 _Z19mnPrintErrorMessageRKNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE+00003304
+[  5] 0x0000000110f34a90 /Applications/MATLAB_R2025b.app/bin/maca64/libmwmcr.dylib+00461456 mnFatalSignalHandler+00000136
+[  6] 0x000000018b071764           /usr/lib/system/libsystem_platform.dylib+00014180 _sigtramp+00000056
+[  7] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  8] 0x0000000116ef6144 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib+00401732 _Z16__kmp_suspend_64ILb0ELb1EEviP11kmp_flag_64IXT_EXT0_EE+00000060
+[  9] 0x0000000121d3d5a8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00234920 _ZN11kmp_flag_64ILb0ELb1EE4waitEP8kmp_infoiPv+00001712
+[ 10] 0x0000000121d398b0 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00219312 _ZL27__kmp_hyper_barrier_release12barrier_typeP8kmp_infoiiiPv+00000164
+[ 11] 0x0000000121d3c3d4 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00230356 _Z18__kmp_fork_barrierii+00000460
+[ 12] 0x0000000121d21eb8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00122552 __kmp_launch_thread+00000220
+[ 13] 0x0000000121d553b8 /opt/homebrew/Cellar/libomp/22.1.0/lib/libomp.dylib+00332728 _ZL19__kmp_launch_workerPv+00000252
+[ 14] 0x000000018b067c08            /usr/lib/system/libsystem_pthread.dylib+00027656 _pthread_start+00000136
+[ 15] 0x000000018b062ba8            /usr/lib/system/libsystem_pthread.dylib+00007080 thread_start+00000008
+
