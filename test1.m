@@ -5,20 +5,21 @@ addpath("svdalgs");
 %%
 clc; clear; close all; rng(1); 
 
-mm = 1000;
-nn = 800;
 kkappa = logspace(3,15,15);
+mm = 1000*ones(1,length(kkappa));
+nn = 800*ones(1,length(kkappa));
 epsln = eps('double')/2;
 mmode = 3:5;
+M = 15;
 
-for i = 1:length(mmode)
+for i = 1:2
     mode = mmode(i);
-    m = mm(1);
-    n = nn(1);
     for j = 1:length(kkappa)
         kappa = kkappa(j);
+        m = mm(j);
+        n = nn(j);
         A = gallery('randsvd', [m,n], kappa, mode);
-        tol1 = sqrt(mm*nn)*epsln;
+        tol1 = sqrt(m*n)*epsln;
 
         % Our algorithm
         [U1,S1,V1,nos1,scnd] = mposj(A);
@@ -33,6 +34,10 @@ for i = 1:length(mmode)
         bound_tmp = tol1*(1+scnd./relgap1);
         number_failed(j,i) = sum( err1 > bound_tmp );
         disp(number_failed(j,i));
+        if number_failed(j,i) ~= 0
+            beep;
+            pause();
+        end
 
         % one-sided Jacobi
         [U2,S2,V2,sva2,work2,info2] = dgesvj_mex(A,'G','U','V',m,eye(n),max(6,m+n));
@@ -61,13 +66,81 @@ for i = 1:length(mmode)
 end
 
 %%
-savedata = 0;
+for i = 3
+    mode = mmode(i);
+    for j = 1:length(kkappa) % Loop over condition numbers
+        kappa = kkappa(j);
+        m = mm(j);
+        n = nn(j); 
+        tol1 = sqrt(m*n)*epsln;
+        err_mposj(j,i)  = -Inf;
+        err_dgesvj(j,i) = -Inf;
+        err_dgejsv(j,i) = -Inf;
+        err_matlab(j,i) = -Inf;
+
+        for k = 1:M
+            % Generate test matrix
+	        A = gallery('randsvd',[m,n],-kappa,mode);
+    
+            %  Apply eigensolvers
+	        [U1,S1,V1,nos1,scnd] = mposj(A);
+            [err1, relgap1] = compute_error(A,V1,'s');
+            [tmp, ind] = max(err1);
+            err_mposj(j,i) = max(err_mposj(j,i), tmp);
+            if err_mposj(j,i) == tmp
+                relgap(j,i) = relgap1(ind);
+            end
+            
+            % Compute bound
+            bound2(j,i) = (1+scnd/relgap(j,i))*tol1;
+    
+            % Access how many eigenvector does not satisfies the bound
+            bound_tmp = (1+scnd./relgap1)*tol1;
+            number_failed(j,i) = sum( err1 > bound_tmp );
+            disp(number_failed(j,i));
+            if number_failed(j,i) ~= 0
+                beep;
+                return;
+            end
+ 
+            % one-sided Jacobi
+            [U2,S2,V2,sva2,work2,info2] = dgesvj_mex(A,'G','U','V',m,eye(n),max(6,m+n));
+            if info2 ~= 0
+                fprintf("Error: DGESVJ does not converge.\n");
+                break;
+            end
+            [err2, ~ ] = compute_error(A,V2,'s');
+            err_dgesvj(j,i) = max(max(err2),err_dgesvj(j,i)); 
+    
+            % Preconditioned one-sided Jacobi
+            [U3,S3,V3,sva3,work3,iwork3,info3] = dgejsv_mex(A,'C','U','V','R','N','N');
+            if info3 ~= 0
+                fprintf("Error: DGEJSV does not converge.\n");
+                break;
+            end
+            [err3, ~ ] = compute_error(A,V3,'s');
+            err_dgejsv(j,i) = max(max(err3),err_dgejsv(j,i));
+    
+            % MATLAB
+            [U4,S4,V4] = svd(A,'econ');
+            [err4, ~] = compute_error(A,V4,'s');
+            err_matlab(j,i) = max(max(err4),err_matlab(j,i));
+            fprintf("M = %d\n", k); 
+        end
+
+        % Print info 
+        fprintf("Finished MODE=%d, kappa is %d of %d\n", mode, j, length(kkappa));
+    end
+end
+
+%%
+savedata = 1;
 if savedata
     save("data/test1.mat");
 end
 
 %%
-drawgraph=10;
+drawgraph= 1;
 
 if drawgraph
     close all;
@@ -103,7 +176,8 @@ if drawgraph
     end
 end
 
-%%  
+
+%%
 printout = 1;
 if printout
     cleanfigure;

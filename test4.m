@@ -8,14 +8,15 @@ clc; clear; close all; rng(1);
 % Parameters 
 nn = round(logspace(1,3,15));
 u = eps('double')/2;
-kkappa = 1e8;
+kkappa = 1e8*ones(1,length(nn));
 mmode = [3,4,5];
+M = 15; 
 
-for i = 1:3
+for i = 1:2
     % Main
     mode = mmode(i);
 
-    for j = 1:length(nn) % Loop over condition numbers
+    for j = 1:length(nn) % Loop over different dimensions
         kappa = kkappa(1);
         n = nn(j); 
         tol1 = 3*sqrt(n)*u;
@@ -61,10 +62,68 @@ for i = 1:3
     end
 end
 
+%%
+for i = 3
+    mode = mmode(i);
+    for j = 1:length(nn) % Loop over condition numbers
+        kappa = kkappa(1);
+        n = nn(j); 
+        tol1 = 3*sqrt(n)*u;
+        err_mpjacobi(j,i) = -Inf;
+        err_jacobi(j,i) = -Inf;
+        err_pjacobi(j,i) = -Inf;
+        err_matlab(j,i) = -Inf;
+
+        for k = 1:M
+            % Generate test matrix
+	        A = gallery('randsvd',n,-kappa,mode);
+    
+            %  Apply eigensolvers
+	        [V1,D1,~,~,~,scnd] = mp_pjacobi(A,'mp3');
+            [err1, relgap1] = compute_error(A,V1,'E');
+            [tmp, ind] = max(err1);
+            err_mpjacobi(j,i) = max(err_mpjacobi(j,i), tmp);
+            if err_mpjacobi(j,i) == tmp
+                relgap(j,i) = relgap1(ind);
+            end
+            
+            % Compute bound
+            bound2(j,i) = (1+scnd/relgap(j,i))*tol1;
+    
+            % Access how many eigenvector does not satisfies the bound
+            bound_tmp = (1+scnd./relgap1)*tol1;
+            number_failed(j,i) = sum( err1 > bound_tmp );
+            disp(number_failed(j,i));
+            if number_failed(j,i) ~= 0
+                beep;
+                pause();
+            end
+    
+            % Standard two-sided Jacobi 
+            [V2,D2] = cjacobi(A);
+            [err2, ~ ] = compute_error(A,V2,'E');
+            err_jacobi(j,i) = max(max(err2),err_jacobi(j,i));
+    
+            % Preconditioned two-sided Jacobi
+            [V3,D3] = mp_pjacobi(A,'mp2');
+            [err3, ~ ] = compute_error(A,V3,'E');
+            err_pjacobi(j,i) = max(max(err3),err_pjacobi(j,i));
+    
+            % MATLAB
+            [V4,D4] = eigsort(A);    
+            [err4, ~ ] = compute_error(A,V4,'E');
+            err_matlab(j,i) = max(max(err4),err_matlab(j,i));
+        end
+
+        % Print info 
+        fprintf("Finished MODE=%d, N is %d of %d\n", mode, j, length(nn));
+    end
+end
+
 beep;
 
 %%
-savedata = 0;
+savedata = 1;
 if savedata
     save("data/test4.mat");
 end

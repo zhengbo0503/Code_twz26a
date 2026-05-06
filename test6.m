@@ -1,9 +1,5 @@
-%TEST6 - Access the accuracy of the computed singular vectors for special
-%matrices
-
-%TEST5 - Access the accuracy of the computed singular vectors for special
-%matrices
-
+%TEST6 - Access the accuracy of the computed eigenvectors for special
+%matrices 
 clear; close all; clc; 
 
 epsln = eps('double')/2;
