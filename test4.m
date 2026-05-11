@@ -1,5 +1,7 @@
-%TEST3 -- access the accuracy of the computed eigenvectors
-%		with varying dimension
+%TEST4 - Test Script
+%	Eigenvectors
+%	Varying matrix size
+%
 addpath("evdalgs");
 addpath("svdalgs");
 %%

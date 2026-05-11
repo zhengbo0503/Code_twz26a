@@ -1,5 +1,7 @@
-%TEST3 -- access the accuracy of the computed eigenvectors
-%		with varying condition number
+%TEST3 - Test Script
+%	Eigenvectors
+%	Varying condition number
+%
 addpath("evdalgs");
 addpath("svdalgs");
 %%

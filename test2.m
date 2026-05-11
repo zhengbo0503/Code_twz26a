@@ -1,5 +1,7 @@
-%TEST2 -- access the accuracy of the computed singular vectors
-%		with varying number of columns.
+%TEST2 - Test Script
+%	Singular vectors
+%	Varying matrix number of columns
+%
 
 addpath("evdalgs");
 addpath("svdalgs");

@@ -1,7 +1,10 @@
-%TEST1 -- access the accuracy of the computed singular vectors
-%		with varying condition number
+%TEST1 - Test Script
+%	Singular vectors
+%	Varying condition number
+%
 addpath("evdalgs");
 addpath("svdalgs");
+
 %%
 clc; clear; close all; rng(1); 
 
