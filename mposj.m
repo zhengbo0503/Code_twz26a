@@ -1,11 +1,11 @@
-function [U,S,V,nos,scalecond,timing] = mposj(G, nop)
+function [U,S,V,nos,scalecond,timing] = mposj(G, nop, wantscond)
 %MPOSJ - Mixed precision one-sided Jacobi algorithm
 %		 using quadruple, double and single precisions
 %
 %   Usage:
 %       [U,S,V] = mposj(G)
 %       [U,S,V,nos] = mposj(G)
-%       [U,S,V,nos,scalecond,timing] = mposj(G)
+%       [U,S,V,nos,scalecond,timing] = mposj(G, nop, true)
 %       [U,S,V] = mposj(G, nop)
 %
 %   Purpose: 
@@ -24,6 +24,12 @@ function [U,S,V,nos,scalecond,timing] = mposj(G, nop)
 %           If nop = 3, MPOSJ will use quadruple precision to apply the
 %           preconditioner; If nop = 2, MPOSJ will use double precision
 %           instead. 
+%       (3) wantscond - Logical, and by default false.
+%           Whether to compute the scaled condition number of the
+%           preconditioned matrix. This is a diagnostic that is not part
+%           of the algorithm, and computing it is expensive when nop = 3
+%           (it requires a quadruple precision SVD), so it must be
+%           requested explicitly and is skipped in the timing tests.
 %   
 %   Outputs:
 %       (1) U,S,V - Real, double matrix.
@@ -34,8 +40,9 @@ function [U,S,V,nos,scalecond,timing] = mposj(G, nop)
 %       (2) nos - Integer.
 %           Number of sweep used by DGESVJ.
 %       (3) scalecond - Real, double.
-%           Scaled condition number of the preconditioned matrix. Useful
-%           for some posterior analysis.
+%           Scaled condition number of the preconditioned matrix, using
+%           the one-sided (column) scaling. Useful for some posterior
+%           analysis. Empty unless wantscond is true.
 %		(4) timing - Real, double vector
 %			The runtime measure for four different components:
 %			  (i) constructing the preconditioner,
@@ -49,19 +56,25 @@ function [U,S,V,nos,scalecond,timing] = mposj(G, nop)
 
 t_total = tic;
 
-[m,n] = size(G);
-if m < n   
-    [Vt,St,Ut,nos,scalecond] = mposj(G');
-    U = Ut; S = St; V = Vt;
-    return
-end
-
-if nargin == 1
+if nargin < 2 || isempty(nop)
     nop = 3; % Use MP3SVDJacobi by default.
 end
 if (nop ~= 2) && (nop ~= 3)
     error("The number of precision (the second argument) should be 2 or 3.");
 end
+if nargin < 3 || isempty(wantscond)
+    wantscond = false; % Diagnostic only, so opt in explicitly.
+end
+
+scalecond = [];
+
+[m,n] = size(G);
+if m < n   
+    [Vt,St,Ut,nos,scalecond,timing] = mposj(G', nop, wantscond);
+    U = Ut; S = St; V = Vt;
+    return
+end
+
 idty = eye(n);
 doqr = (m >= (11*n)/6); % Consistent with LAPACK choice. 
 
@@ -79,17 +92,18 @@ t_apply_preconditioner = tic;
 if nop == 3
     Gmp = mp(G); 
     Vdmp = mp(Vd); 
-    Gt = Gmp*Vdmp; 
-    Gt = double(Gt); 
+    Gtmp = Gmp*Vdmp; 
+    Gt = double(Gtmp); 
 else
-    Gt = G*Vd; 
+    Gt = G*Vd;
+    Gtmp = Gt;
 end
 
 t_apply_preconditioner = toc(t_apply_preconditioner);
 
 % Output scaled condition number for posterior analysis. 
-if nargout >= 5
-    scalecond = scond(Gt); 
+if wantscond
+    scalecond = double(scond(Gtmp,'C')); 
 end
 
 t_Jacobi = tic; 

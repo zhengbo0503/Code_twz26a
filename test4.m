@@ -1,4 +1,4 @@
-%TEST2 -- timing test, changing number of cols 
+%TEST4 -- timing test, changing number of cols
 
 clc; close all; clear; rng(1);
 

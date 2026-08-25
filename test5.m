@@ -17,17 +17,22 @@ for i = 1:length(m)
     mm = m(i);
     nn = n(i);
     A = gallery('randsvd', [mm,nn], 1e6, 3, 'single');
+    sref = reference_singular_values(A);
 
     % Our algorithm 
     mposj_ssd(warmup_matrix); % preload function 
     tic_mposj_tmp1 = tic;
-    [~,~,~,~,~] = mposj_ssd(A);
+    [~,~,~,~] = mposj_ssd(A);
     tic_mposj_tmp1 = toc(tic_mposj_tmp1);
     tic_mposj_tmp2 = tic;
-    [U1,S1,V1,nos,scnd] = mposj_ssd(A);
+    [U1,S1,V1,nos] = mposj_ssd(A);
     tic_mposj_tmp2 = toc(tic_mposj_tmp2);
     time_mposj(i) = (tic_mposj_tmp1 + tic_mposj_tmp2)/2;
-    [f1(i),~,~,~] = compute_error_temp(A, U1, S1, V1);
+    [f1(i),~,~,~] = compute_error(A, U1, S1, V1, sref);
+
+    % Scaled condition number for the reference line, computed outside
+    % the timed runs so that it does not inflate time_mposj.
+    [~,~,~,~,scnd] = mposj_ssd(A, true);
     
     % SGESVJ (plain Jacobi)
     sgesvj_mex(warmup_matrix, 'G', 'U', 'V', size(warmup_matrix, 2), eye(size(warmup_matrix, 2),'single'), size(warmup_matrix,1)+size(warmup_matrix,2)); 
@@ -42,7 +47,7 @@ for i = 1:length(m)
         break;
     end
     time_sgesvj(i) = (tic_sgesvj_tmp1 + tic_sgesvj_tmp2)/2;
-    [f2(i),~,~,~] = compute_error_temp(A, U2, S2, V2);
+    [f2(i),~,~,~] = compute_error(A, U2, S2, V2, sref);
 
     % DGEJSV (preconditioned Jacobi)
     sgejsv_mex(warmup_matrix,'C','U','V','R','N','N');
@@ -57,7 +62,7 @@ for i = 1:length(m)
         break;
     end
     time_sgejsv(i) = (tic_sgejsv_tmp1 + tic_sgejsv_tmp2)/2;
-    [f3(i),~,~,~] = compute_error_temp(A, U3, S3, V3);
+    [f3(i),~,~,~] = compute_error(A, U3, S3, V3, sref);
 
 
     bound2(i) = scnd * sqrt(mm * nn) * epsln;
@@ -100,33 +105,3 @@ legend('MP3JacobiSVD', 'SGESVJ', 'SGEJSV')
 set(findall(gcf, 'Type', 'Line'), 'LineWidth', 1);
 xlabel('Number of columns', 'FontSize', 10); 
 ylabel('Runtime (sec)', 'FontSize', 10); 
-
-%%
-function [f, r, oU, oV, errV, relgap] = compute_error_temp(A, U, S, V)
-
-errV = zeros(size(A,2),1); 
-r = norm(A - U*S*V','fro')/norm(A,'fro');
-oU = norm(U'*U - eye(size(U,2)), inf);
-oV = norm(V'*V - eye(size(V,2)), inf);
-
-% Forward error needs special treatment
-Aref = double(A);
-[~,Sref,~] = svd(Aref, 'econ');
-sref = sort(diag(Sref),'descend');
-sref = reshape(sref, length(sref), 1);
-s = sort(diag(S), 'descend');
-for (i = 1:length(s))
-    if (s(i) < eps('double')/2)
-        s = s(1:i-1); 
-        break;
-    end
-end
-s = reshape(s, length(s), 1);
-f = max(abs(sref - s)./abs(sref));
-
-if nargout == 6
-    % relgap = sval_gap(s, sref); 
-    relgap = sval_gap(sref); 
-end
-
-end

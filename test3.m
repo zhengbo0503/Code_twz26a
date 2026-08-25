@@ -1,4 +1,4 @@
-%TEST4 -- test script for MPOSJ for anymatrix collection.
+%TEST3 -- accuracy test for MPOSJ on matrices from the Anymatrix collection.
 
 clc; clear; close all; rng(1);
 
@@ -16,10 +16,9 @@ for i = 1:4
     m(i) = max(mm,nn); 
     
     % %%%
-    Sref = svd(mp(A,71)); 
-    Sref = sort(Sref, 'descend'); 
+    Sref = reference_singular_values(A);
     
-    [U1,S1,V1,nos1,scnd] = mposj(A);
+    [U1,S1,V1,nos1,scnd] = mposj(A, 3, true);
     S1 = reshape(sort(diag(S1), 'descend'), size(Sref,1), size(Sref,2));
     err1(1:min(mm,nn),i) = abs(S1 - Sref)./Sref;
     
@@ -41,10 +40,10 @@ for i = 1:4
     S4 = reshape(sort(diag(S4), 'descend'), size(Sref,1), size(Sref,2));
     err4(1:min(mm,nn),i) = abs(S4 - Sref)./Sref;
     
-    bound1(1:min(mm,nn),i) = scond(A) * sqrt(mm * nn)* epsln * ones(min(mm,nn),1);
+    bound1(1:min(mm,nn),i) = scond(A, 'C') * sqrt(mm * nn)* epsln * ones(min(mm,nn),1);
     bound2(1:min(mm,nn),i) = scnd * sqrt(mm * nn) * epsln * ones(min(mm,nn),1);
 
-    scond_store(i) = scond(A); 
+    scond_store(i) = scond(A, 'C'); 
     scnd_store(i) = scnd; 
 end
 
@@ -96,6 +95,3 @@ for i = 1:4
     % legend({'MP3JacobiSVD', '\texttt{DGESVJ}', '\texttt{DGEJSV}', 'MATLAB \texttt{svd}'}, 'FontSize', 10);
 
 end
-
-%% 
-myprint('special_matrix', 1); 

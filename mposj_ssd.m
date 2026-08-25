@@ -1,11 +1,11 @@
-function [U,S,V,nos,scalecond] = mposj_ssd(G)
+function [U,S,V,nos,scalecond] = mposj_ssd(G, wantscond)
 %MPOSJ_SSD - Mixed precision one-sided Jacobi algorithm that uses single and
 %        double precision
 %
 %   Usage:
 %       [U,S,V] = MPOSJ_SSD(G)
 %       [U,S,V,nos] = MPOSJ_SSD(G)
-%       [U,S,V,nos,scalecond] = MPOSJ_SSD(G)
+%       [U,S,V,nos,scalecond] = MPOSJ_SSD(G, true)
 %
 %   Purpose: 
 %       MPOSJ_SSD computes a SVD of a general matrix based on LAPACK routine
@@ -18,6 +18,11 @@ function [U,S,V,nos,scalecond] = mposj_ssd(G)
 %
 %   Arguments: 
 %       (1) G - Real, double matrix.
+%       (2) wantscond - Logical, and by default false.
+%           Whether to compute the scaled condition number of the
+%           preconditioned matrix. This is a diagnostic that is not part
+%           of the algorithm, so it must be requested explicitly and is
+%           skipped in the timing tests.
 %   
 %   Outputs:
 %       (1) U,S,V - Real, double matrix.
@@ -28,16 +33,23 @@ function [U,S,V,nos,scalecond] = mposj_ssd(G)
 %       (2) nos - Integer.
 %           Number of sweep used by DGESVJ.
 %       (3) scalecond - Real, double.
-%           Scaled condition number of the preconditioned matrix. Useful
-%           for some posterior analysis. 
+%           Scaled condition number of the preconditioned matrix, using
+%           the one-sided (column) scaling. Useful for some posterior
+%           analysis. Empty unless wantscond is true. 
 %
 %   Author:
 %       Zhengbo Zhou, Manchester, UK, Dec 2025
 %
 
+if nargin < 2 || isempty(wantscond)
+    wantscond = false; % Diagnostic only, so opt in explicitly.
+end
+
+scalecond = [];
+
 [m,n] = size(G);
 if m < n   
-    [Vt,St,Ut,nos,scalecond] = mposj_ssd(G');
+    [Vt,St,Ut,nos,scalecond] = mposj_ssd(G', wantscond);
     U = Ut; S = St; V = Vt;
     return
 end
@@ -46,14 +58,17 @@ idty = eye(n);
 doqr = (m >= (11*n)/6); % Consistent with LAPACK choice. 
 
 % Compute the preconditioner at single precision
+% Here we don't need the orthogonalization step since 
+% Vt is already orthogonalized at working precision. 
 [~,~,Vt] = svd(single(G),'econ');
 
-% Precondition the matrix G at double precision
-Gt = single(double(G)*double(Vt)); 
+% Apply the preconditioner at double precision, then demote for SGESVJ
+Gtmp = double(G)*double(Vt);
+Gt = single(Gtmp);
 
 % Output scaled condition number for posterior analysis. 
-if nargout >= 5
-    scalecond = scond(Gt); 
+if wantscond
+    scalecond = double(scond(Gtmp, 'C'));
 end
 
 % Apply the one-sided Jacobi

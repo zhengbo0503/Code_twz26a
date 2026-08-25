@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software and the paper below."
+title: "Code_twz26a: MATLAB codes for a mixed-precision one-sided Jacobi algorithm"
+abstract: >-
+  MATLAB implementation and experiments for a mixed-precision one-sided
+  Jacobi algorithm that computes accurate singular values.
+type: software
+authors:
+  - family-names: Zhou
+    given-names: Zhengbo
+  - family-names: Tisseur
+    given-names: Françoise
+  - family-names: Webb
+    given-names: Marcus
+license: MIT
+repository-code: "https://github.com/zhengbo0503/Code_twz26a"
+date-released: 2026-08-25
+keywords:
+  - singular value decomposition
+  - one-sided Jacobi algorithm
+  - mixed precision
+  - numerical linear algebra
+  - MATLAB
+preferred-citation:
+  type: article
+  title: "Computing accurate singular values using a mixed-precision one-sided Jacobi algorithm"
+  authors:
+    - family-names: Zhou
+      given-names: Zhengbo
+    - family-names: Tisseur
+      given-names: Françoise
+    - family-names: Webb
+      given-names: Marcus
+  year: 2026
+  journal: "arXiv preprint arXiv:2602.18134"
+  url: "https://arxiv.org/abs/2602.18134"
+  identifiers:
+    - type: other
+      value: "arXiv:2602.18134"
+      description: "arXiv preprint identifier"

@@ -20,28 +20,29 @@ for mode = 1:5
         mm = m(i);
         nn = n(i);
         A = gallery('randsvd', [mm,nn], kappa, mode);
+        sref = reference_singular_values(A);
 
-        [U1,S1,V1,nos1,scnd] = mposj(A);
-        [f1(i,mode),~,~,~] = compute_error(A, U1, S1, V1);
+        [U1,S1,V1,nos1,scnd] = mposj(A, 3, true);
+        [f1(i,mode),~,~,~] = compute_error(A, U1, S1, V1, sref);
 
         [U2,S2,V2,sva2,work2,info2] = dgesvj_mex(A,'G','U','V',nn,eye(nn),max(6,mm+nn));
         if info2 ~= 0
             fprintf("Error: DGESVJ does not converge.\n");
             break;
         end
-        [f2(i,mode),~,~,~] = compute_error(A, U2, S2, V2);
+        [f2(i,mode),~,~,~] = compute_error(A, U2, S2, V2, sref);
 
         [U3,S3,V3,sva3,work3,iwork3,info3] = dgejsv_mex(A,'C','U','V','R','N','N');
         if info3 ~= 0
             fprintf("Error: DGEJSV does not converge.\n");
             break;
         end
-        [f3(i,mode),~,~,~] = compute_error(A, U3, S3, V3);
+        [f3(i,mode),~,~,~] = compute_error(A, U3, S3, V3, sref);
 
         [U4,S4,V4] = svd(A,'econ');
-        [f4(i,mode),~,~,~] = compute_error(A, U4, S4, V4);
+        [f4(i,mode),~,~,~] = compute_error(A, U4, S4, V4, sref);
 
-        bound1(i,mode) = scond(A) * sqrt(mm * nn)* epsln;
+        bound1(i,mode) = scond(A, 'C') * sqrt(mm * nn)* epsln;
         bound2(i,mode) = scnd * sqrt(mm * nn) * epsln;
 
         fprintf("Finished MODE = %d, %d of %d\n", mode, i, length(m));

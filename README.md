@@ -1,8 +1,10 @@
-# Code_twz26
+# Code_twz26a
 
 ## 1. Description
-Version: January 29, 2026  
-Description: MATLAB codes for paper "*Computing accurate singular values using a mixed-precision one-sided Jacobi algorithm*" by Zhengbo Zhou, Françoise Tisseur, and Marcus Webb.   
+Version: August 25, 2026  
+Description: MATLAB codes for paper 
+"[*Computing accurate singular values using a mixed-precision one-sided Jacobi algorithm*](https://arxiv.org/abs/2602.18134)" 
+by Zhengbo Zhou, Françoise Tisseur, and Marcus Webb.   
 This repository has been tested in the following configuration:
 ```
 OS: macOS 26.0.1 25A362 arm64 
@@ -20,9 +22,7 @@ We are using version 1.4.
 
 ### (2) [Advanpix Multiprecision Computing Toolbox](https://www.advanpix.com/)
 You inevitably need some packages to simulate the quadruple precision. 
-For our project, we chose to use **Advanpix (Version 1.4)**. 
-If you use other packages, such as `vpa()` in the MATLAB Symbolic Math Toolbox,
-you need to change all occurance of `mp()` in this repo to the desired command.
+For our project, we chose to use **Advanpix (Version 5.4.4 Build 16174)**.
 
 ### (3) MEX facilities for LAPACK SVD routines
 In order to compile files 
@@ -54,20 +54,25 @@ gfortran_lib = '/opt/homebrew/Cellar/gcc/15.1.0/lib/gcc/15'
 ```
 Once you update this part, you can run `build_sgesvj_mex.m` in MATLAB command window.
 You will get `sgesvj_mex.mexmaca64` in the folder `get_sgesvj`. Move it to the main folder
-`Code_twz26`, then you are good to go. 
+`Code_twz26a`, then you are good to go. 
 
 ## 3. Codes description
 - The main algorithm is
-   [`mposj.m`](https://github.com/zhengbo0503/Code_twz26/blob/main/mposj.m)
+   [`mposj.m`](https://github.com/zhengbo0503/Code_twz26a/blob/main/mposj.m)
    which implements our algorithm with (single, double, quadruple) setting. 
 - Another implementation of our algorithm using (single, single, double)
    setting is
-   [`mposj_ssd`](https://github.com/zhengbo0503/Code_twz26/blob/main/mposj_ssd.m). 
+   [`mposj_ssd`](https://github.com/zhengbo0503/Code_twz26a/blob/main/mposj_ssd.m). 
 - `test1.m`: (*Figure 1*) accuracy tests for random matrices with varying condition numbers. 
 - `test2.m`: (*Figure 2*) accuracy tests for random matrices with varying number of columns.
 - `test3.m`: (*Figure 3*) accuracy tests for matrices from Anymatrix. 
 - `test4.m`: (*Figure 4*) timing tests for random matrices with varying number of columns.
-- `test5.m`: (*Figure 5*) timing tests for random matrices using `mposj_ssd`.
+- `test5.m`: (*Figure 5*) accuracy and timing tests for random matrices using `mposj_ssd`.
+- `reference_singular_values.m`: computes the reference singular values at
+  71 decimal digits for all accuracy experiments.
+- `*.mexmaca64*`: MEX facilities for calling LAPACK routines from MATLAB.
+  You will need `DGESVJ` and `DGEJSV` for tests 1-4 and `SGESVJ` and
+  `SGEJSV` for test 5. 
 
 ## 4. Quick Example 
 To run a quick example of our algorithm, you can run the following code in MATLAB command window:
@@ -94,3 +99,6 @@ However, MATLAB already ships with its own `libomp` for the MEX runtime. On my l
 /Applications/MATLAB_R2025b.app/bin/maca64/libomp.dylib
 ```
 As a result, when the MEX file is executed, two different `libomp` runtimes are loaded into the same MATLAB process, which leads to segmentation faults.
+
+## 6. License
+This code is distributed under the terms of the [MIT License](LICENSE).
